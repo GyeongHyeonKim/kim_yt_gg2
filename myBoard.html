@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./css/autocomplete.css">
+    <link rel="stylesheet" href="./css/pagination.css">
+    <link rel="stylesheet" href="./css/yt.css">
+    <link rel="stylesheet" href="./css/board.css">
+</head>
+<body>
+    <section class="Box">
+        <nav id="topMenu">
+            <a id="logo" href="{% url 'yt:index' %}">
+                <img src="./image/logo.png">
+            </a>
+            <div id="menu">
+                <div class="menuLink">
+                    <a href="./index.html#main_text0">About us</a>
+                </div>
+                <div class="menuLink">
+                    <a href="./myboard.html">Board</a>
+                </div>
+                <div class="menuLink">
+                    <a href="./index.html#main_text1">Locations</a>
+                </div>
+                <div class="menuLink">
+                    <a href="./login.html">LogIn</a>
+                </div>
+            </div>
+        </nav>
+        <script>function send()
+        {
+          var chk = document.getElementsByName('selected[]');
+          var len = chk.length;
+          var arr = new Array();
+
+          for(var i=0;i<len;i++){
+            if(chk[i].checked == true){
+              arr.push(chk[i].value)
+            }
+          }
+          document.delete_form.delete_data.value=arr;
+        }
+        </script>
+        <div class="tableBox">
+        <table>
+          <thead>
+            <tr>
+              <th scope="col" id="deleteIdx"></th>
+              <th scope="col">제목</th>
+              <th scope="col">아이디</th>
+              <th scope="col">작성일</th>
+              <th scope="col">마지막 업데이트</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+                <th id="deleteBox"><input type="checkbox" name="selected[]" id="{{ board.id }}" value="{{ board.id }}"></th>
+                <td>
+                  <a href="detail/{{ board.id }}"></a>
+                </td>
+                <td>
+                  <a href="detail/{{ board.id }}"></a>
+                </td>
+                <td>
+                  <a href="detail/{{ board.id }}"></a>
+                </td>
+                <td>
+                  <a href="detail/{{ board.id }}"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="tableFunc">
+          <form method="POST" action="{% url 'yt:boardWrite' %}">
+            <button><i class="fa fa-pencil-square-o" aria-hidden="true">글쓰기</i></button>
+          </form>
+          <br>
+          <form method="POST" action="{% url 'yt:myBoard' %}">
+            <button><i class="fa fa-user-circle" aria-hidden="true">나의 글</i></button>
+          </form>
+          <form method="POST" name="delete_form" action="{% url 'yt:myBoardDelete' %}">
+              <input type="hidden" name="delete_data" value="">
+              <button class="btn btn-primary" onclick="send()">
+                <i class="fa fa-trash-o" aria-hidden="true">삭제</i>
+              </button>
+          </form>
+        </div>
+      </div>
+      <div class="paginationBox">
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            <!-- 페이지리스트 -->
+            <!-- 다음페이지 -->
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+            </li>
+        </ul>
+      </div>
+    </section>
+</body>
